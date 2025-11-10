@@ -3,7 +3,7 @@
 # Copyright 2024 Robert de Bock (robert@meinit.nl)
 #
 # Original source: https://github.com/robertdebock/pre-commit (v1.5.3)
-# This file is unmodified from the original source.
+# This file has been modified from the original source.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,12 +22,11 @@ checker() {
     if [ -d "${folder}" ] ; then
       for file in "${folder}"/*.yml ; do
         if [ -f "${file}" ] ; then
-          linenumber=$(grep -n ' when: ' "${file}" | cut -d: -f1)
-          if [ -n "${linenumber}" ] ; then
-            if [ "${linenumber}" -gt 0 ] ; then
+          grep -n ' when: .* and \| when: .* or ' "${file}" | while IFS=: read -r linenumber _; do
+            if [ -n "${linenumber}" ] && [ "${linenumber}" -gt 0 ] 2>/dev/null ; then
               echo "${file}:${linenumber} improve readability, spread conditions vertically as a list."
             fi
-          fi
+          done
         fi
       done
     fi
