@@ -4,3 +4,4 @@ pre-push:
   jobs:
     - name: ansible-lint
       run: python3 -m ansiblelint -v --force-color
+      glob: "*.{yml,yaml}"
