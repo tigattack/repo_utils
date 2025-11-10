@@ -7,9 +7,10 @@
       groupName: "ansible-lint",
     },
     {
-      // Automerge ansible-lint minor and patch updates
+      // Automerge ansible-lint minor and patch updates after 3 days
       matchPackageNames: ["/ansible-lint/"],
       matchUpdateTypes: ["minor", "patch"],
+      minimumReleaseAge: "3d",
       automerge: true,
     },
     {
