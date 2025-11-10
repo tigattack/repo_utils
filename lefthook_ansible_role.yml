@@ -1,0 +1,44 @@
+---
+
+extends:
+  - lefthook_ansible_lint.yml
+
+pre-commit:
+  parallel: true
+  jobs:
+    - script: ansible_role_find_empty_files.sh
+      runner: bash
+      skip:
+        - merge
+        - rebase
+
+    - script: ansible_role_find_empty_directories.sh
+      runner: bash
+      skip:
+        - merge
+        - rebase
+
+    - script: ansible_role_find_undefined_handlers.sh
+      runner: bash
+      skip:
+        - merge
+        - rebase
+
+    - script: ansible_role_find_horizontal_when.sh
+      runner: bash
+      skip:
+        - merge
+        - rebase
+
+    # Checks from tigattack/ansible-pre-commit v1.6.1
+    - script: ansible_role_find_unused_variable.sh
+      runner: bash
+      skip:
+        - merge
+        - rebase
+
+    - script: ansible_role_find_unquoted_values.sh
+      runner: bash
+      skip:
+        - merge
+        - rebase
