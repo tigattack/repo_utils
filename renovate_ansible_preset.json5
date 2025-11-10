@@ -12,5 +12,12 @@
       matchUpdateTypes: ["minor", "patch"],
       automerge: true,
     },
+    {
+      // Automerge molecule minor and patch updates after 7 days
+      matchPackageNames: ["/molecule/"],
+      matchUpdateTypes: ["minor", "patch"],
+      minimumReleaseAge: "7d",
+      automerge: true,
+    },
   ],
 }
