@@ -47,3 +47,10 @@ pre-commit:
       skip:
         - merge
         - rebase
+
+    - name: 'Ansible role: Find conflicting defaults'
+      script: ansible_role_find_conflicting_defaults.sh
+      runner: bash
+      skip:
+        - merge
+        - rebase
