@@ -27,14 +27,14 @@ checker() {
   vars=""
 
   for folder in ${extra_path}/${type} ; do
-    if [ -d "${folder}" ] && [ -f "${folder}/main.yml" ] ; then
+    if [ -d "$folder" ] && [ -f "${folder}/main.yml" ] ; then
       grep -v '^#' "${folder}/main.yml" | grep -v '^$' | grep -v -- '---' | grep -v '^ ' | grep -v '^_' | cut -d: -f1 | while read -r variable ; do
-        matches="$(rg -il "${variable}" -- "${extra_path}" | grep -vEc '(tasks/assert.yml|README.md)')"
-        internalmatches="$(grep -ic "${variable}" "${folder}/main.yml")"
-        if [ "${matches}" -le 1 ] && [  "${internalmatches}" -le 1 ] ; then
-          echo "${folder}/main.yml defines ${variable} which is not used."
+        matches="$(rg -il "$variable" -- "$extra_path" | grep -vEc '(tasks/assert.yml|README.md)')"
+        internalmatches="$(grep -ic "$variable" "${folder}/main.yml")"
+        if [ "$matches" -le 1 ] && [  "$internalmatches" -le 1 ] ; then
+          echo "${folder}/main.yml defines $variable which is not used."
         fi
-        vars="${vars} ${variable}"
+        vars="$vars $variable"
       done
     fi
   done
@@ -63,10 +63,10 @@ if [ -z "$sub_folder" ]; then
 fi
 
 # Save the errors in a variable "errors".
-errors=$(for type in defaults vars ; do checker "${type}" "${sub_folder}" ; done)
+errors=$(for type in defaults vars ; do checker "$type" "$sub_folder" ; done)
 
 # If the "errors" variable has content, something is wrong.
-if [ -n "${errors}" ] ; then
-  echo "${errors}"
+if [ -n "$errors" ] ; then
+  echo "$errors"
   exit 1
 fi

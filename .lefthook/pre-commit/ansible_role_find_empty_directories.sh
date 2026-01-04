@@ -22,7 +22,7 @@
 checker() {
   if [ -d "${1}" ] ; then
     count=$(find "${1}" | wc -l)
-    if [ "${count}" -lt 2 ] ; then
+    if [ "$count" -lt 2 ] ; then
       echo "The directory ${1} is empty."
       return 1
     fi

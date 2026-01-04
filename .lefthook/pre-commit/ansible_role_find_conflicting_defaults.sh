@@ -6,7 +6,7 @@ checker() {
   yq '.argument_specs.main.options | keys | .[]' meta/argument_specs.yml | while read -r var; do
     # Skip required variables
     required=$(yq ".argument_specs.main.options.${var}.required // false" meta/argument_specs.yml)
-    if [ "${required}" = "true" ]; then
+    if [ "$required" = "true" ]; then
       continue
     fi
 
@@ -17,12 +17,12 @@ checker() {
     defaults_value=$(yq ".${var}" defaults/main.yml)
 
     # Skip Jinja templates
-    if echo "${defaults_value}" | grep -q '{{'; then
+    if echo "$defaults_value" | grep -q '{{'; then
       continue
     fi
 
     # Compare
-    if [ "${argspec_default}" != "${defaults_value}" ]; then
+    if [ "$argspec_default" != "$defaults_value" ]; then
       echo "${var}: argspec='${argspec_default}' != defaults='${defaults_value}'"
     fi
   done
@@ -39,7 +39,7 @@ fi
 
 errors=$(checker)
 
-if [ -n "${errors}" ] ; then
-  echo "${errors}"
+if [ -n "$errors" ] ; then
+  echo "$errors"
   exit 1
 fi

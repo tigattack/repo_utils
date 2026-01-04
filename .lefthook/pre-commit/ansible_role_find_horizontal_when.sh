@@ -21,11 +21,11 @@
 
 checker() {
   for folder in ${1} ; do
-    if [ -d "${folder}" ] ; then
-      for file in "${folder}"/*.yml ; do
-        if [ -f "${file}" ] ; then
-          grep -n ' when: .* and \| when: .* or ' "${file}" | while IFS=: read -r linenumber _; do
-            if [ -n "${linenumber}" ] && [ "${linenumber}" -gt 0 ] 2>/dev/null ; then
+    if [ -d "$folder" ] ; then
+      for file in "$folder"/*.yml ; do
+        if [ -f "$file" ] ; then
+          grep -n ' when: .* and \| when: .* or ' "$file" | while IFS=: read -r linenumber _; do
+            if [ -n "$linenumber" ] && [ "$linenumber" -gt 0 ] 2>/dev/null ; then
               echo "${file}:${linenumber} improve readability, spread conditions vertically as a list."
             fi
           done
