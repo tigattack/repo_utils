@@ -17,6 +17,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+. "$(dirname "$0")/utils.sh"
+
 checker() {
   for folder in ${1} ; do
     if [ -d "${folder}" ] ; then
@@ -45,6 +47,11 @@ while getopts 'f:' OPTION; do
   esac
 done
 shift "$((OPTIND -1))"
+
+# shellcheck disable=SC2043
+for binary in grep ; do
+  bincheck "$binary"
+done
 
 if [ -z "$sub_folder" ]; then
   sub_folder="."

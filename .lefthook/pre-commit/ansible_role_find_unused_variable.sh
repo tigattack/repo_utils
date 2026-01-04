@@ -19,9 +19,7 @@
 
 # A script to find unused variables in Ansible roles.
 
-for binary in grep cut wc ; do
-  which "${binary}" > /dev/null 2>&1 || (echo "Missing ${binary}, please install it." ; exit 1)
-done
+. "$(dirname "$0")/utils.sh"
 
 checker() {
   type="${1}"
@@ -52,6 +50,10 @@ while getopts 'f:' OPTION; do
       exit 1
     ;;
   esac
+done
+
+for binary in rg grep cut ; do
+  bincheck "$binary"
 done
 
 shift "$((OPTIND -1))"

@@ -1,15 +1,11 @@
 The scripts in this directory are sourced from the following project:
 
-- ansible_role_find_empty_files.sh
 - ansible_role_find_empty_directories.sh
-- ansible_role_find_undefined_handlers.sh
+- ansible_role_find_empty_files.sh
 - ansible_role_find_horizontal_when.sh
-  Source: https://github.com/robertdebock/pre-commit (v1.5.3)
-  Copyright 2024 Robert de Bock (robert@meinit.nl)
-  Unmodified from original source
-
-- ansible_role_find_unused_variable.sh
+- ansible_role_find_undefined_handlers.sh
 - ansible_role_find_unquoted_values.sh
+- ansible_role_find_unused_variable.sh
   Source: https://github.com/robertdebock/pre-commit (v1.5.3)
   Copyright 2024 Robert de Bock (robert@meinit.nl)
   Modified from original source

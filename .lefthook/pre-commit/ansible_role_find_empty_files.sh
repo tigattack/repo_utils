@@ -3,7 +3,7 @@
 # Copyright 2024 Robert de Bock (robert@meinit.nl)
 #
 # Original source: https://github.com/robertdebock/pre-commit (v1.5.3)
-# This file is unmodified from the original source.
+# This file has been modified from the original source.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-which wc > /dev/null 2>&1 || (echo "Missing wc, please install it." ; exit 1)
+. "$(dirname "$0")/utils.sh"
 
 checker() {
   for folder in ${1} ; do
@@ -47,6 +47,11 @@ while getopts 'f:l:' OPTION; do
   esac
 done
 shift "$((OPTIND -1))"
+
+# shellcheck disable=SC2043
+for binary in wc ; do
+  bincheck "$binary"
+done
 
 if [ -z "$sub_folder" ]; then
   sub_folder="."

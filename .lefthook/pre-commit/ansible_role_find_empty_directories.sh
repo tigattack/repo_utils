@@ -3,7 +3,7 @@
 # Copyright 2024 Robert de Bock (robert@meinit.nl)
 #
 # Original source: https://github.com/robertdebock/pre-commit (v1.5.3)
-# This file is unmodified from the original source.
+# This file has been modified from the original source.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-which find > /dev/null 2>&1 || (echo "Missing find, please install it." ; exit 1)
+. "$(dirname "$0")/utils.sh"
 
 checker() {
   if [ -d "${1}" ] ; then
@@ -44,6 +44,10 @@ while getopts 'f:d:' OPTION; do
   esac
 done
 shift "$((OPTIND -1))"
+
+for binary in find wc ; do
+  bincheck "$binary"
+done
 
 if [ -z "$sub_folder" ]; then
   sub_folder="."

@@ -3,7 +3,7 @@
 # Copyright 2024 Robert de Bock (robert@meinit.nl)
 #
 # Original source: https://github.com/robertdebock/pre-commit (v1.5.3)
-# This file is unmodified from the original source.
+# This file has been modified from the original source.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +19,7 @@
 
 # A script to find handlers that are called but not defined in Ansible roles.
 
-for binary in grep cut sort uniq awk sed ; do
-  which "${binary}" > /dev/null 2>&1 || (echo "Missing ${binary}, please install it." ; exit 1)
-done
+. "$(dirname "$0")/utils.sh"
 
 checker() {
   for folder in ${1} ; do
@@ -55,6 +53,10 @@ while getopts 'f:' OPTION; do
   esac
 done
 shift "$((OPTIND -1))"
+
+for binary in grep sort uniq awk sed ; do
+  bincheck "$binary"
+done
 
 if [ -z "$sub_folder" ]; then
   sub_folder="."

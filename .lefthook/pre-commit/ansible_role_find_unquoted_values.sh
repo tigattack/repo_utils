@@ -19,9 +19,7 @@
 
 # A script to find not quoted values in Ansible roles.
 
-for binary in grep cut wc ; do
-  which "${binary}" > /dev/null 2>&1 || (echo "Missing ${binary}, please install it." ; exit 1)
-done
+. "$(dirname "$0")/utils.sh"
 
 checker() {
   for directory in defaults handlers tasks meta molecule vars ; do
@@ -57,6 +55,10 @@ while getopts 'f:' OPTION; do
   esac
 done
 shift "$((OPTIND -1))"
+
+for binary in grep find wc printf; do
+  bincheck "$binary"
+done
 
 if [ -z "$sub_folder" ]; then
   sub_folder="."

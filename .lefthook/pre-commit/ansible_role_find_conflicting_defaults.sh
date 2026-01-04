@@ -1,8 +1,6 @@
 #!/bin/bash
 
-for binary in yq ; do
-  which "${binary}" > /dev/null 2>&1 || (echo "Missing ${binary}, please install it." ; exit 1)
-done
+. "$(dirname "$0")/utils.sh"
 
 checker() {
   yq '.argument_specs.main.options | keys | .[]' meta/argument_specs.yml | while read -r var; do
@@ -29,6 +27,10 @@ checker() {
     fi
   done
 }
+
+for binary in yq grep ; do
+  bincheck "$binary"
+done
 
 if [ ! -f "meta/argument_specs.yml" ]; then
   echo "Argument specs not found, skipping check."
