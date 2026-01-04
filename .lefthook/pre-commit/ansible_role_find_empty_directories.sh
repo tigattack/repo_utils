@@ -38,7 +38,7 @@ while getopts 'f:d:' OPTION; do
       maxdepth="$OPTARG"
       ;;
     *)
-      echo "Unknow argument: $0 [-f path]" >&2
+      echo "Unknown argument: $0 [-f path]" >&2
       exit 1
     ;;
   esac

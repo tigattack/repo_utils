@@ -41,7 +41,7 @@ while getopts 'f:l:' OPTION; do
       nbr_lines="$OPTARG"
       ;;
     *)
-      echo "Unknow argument: $0 [-f path] [-l lines]" >&2
+      echo "Unknown argument: $0 [-f path] [-l lines]" >&2
       exit 1
     ;;
   esac

@@ -46,7 +46,7 @@ while getopts 'f:' OPTION; do
       sub_folder="$OPTARG"
       ;;
     *)
-      echo "Unknow argument: $0 [-f path]" >&2
+      echo "Unknown argument: $0 [-f path]" >&2
       exit 1
     ;;
   esac
