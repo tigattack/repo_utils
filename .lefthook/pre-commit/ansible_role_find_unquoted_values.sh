@@ -30,7 +30,7 @@ checker() {
         version_pattern='[a-zA-z0-9\-\_]*: [0-9].*\.'
         colon_pattern='[a-zA-z0-9\-\_]*: [a-zA-z0-9\-\_].*:.*'
         pattern="(${version_pattern}|${colon_pattern})"
-        matches=$(find "$folder" -name '*.yml' -exec grep -HE "^${pattern}" {} \; | grep -oE "$var_name_pattern" | sed -e 's/.$//' -e 's/:/: /')
+        matches=$(find "$folder" -name '*.yml' -exec grep -HnE "^${pattern}" {} \; | grep -oE "$var_name_pattern" | sed -e 's/.$//' -e 's/\(:[0-9]*\):/\1: /')
         match_count=$(printf "%s" "$matches" | wc -l)
         if [ -n "$match_count" ] ; then
           if [ "$match_count" -gt 0 ] ; then
