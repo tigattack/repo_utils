@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# A script to find conflicting default values between argument_specs.yml and defaults/main.yml in Ansible roles.
+# NOTE: Jinja templated values in defaults/main.yml are ignored.
+
 . "$(dirname "$0")/utils.sh"
 
 checker() {

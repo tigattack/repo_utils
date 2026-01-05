@@ -17,6 +17,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# A script to find horizontal when statements in Ansible roles.
+
 . "$(dirname "$0")/utils.sh"
 
 checker() {
