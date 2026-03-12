@@ -20,8 +20,8 @@
       automerge: true,
     },
     {
-      // Automerge molecule minor and patch updates after 7 days
-      matchPackageNames: ["/molecule/"],
+      // Automerge molecule and lefthook minor and patch updates after 7 days
+      matchPackageNames: ["molecule", "lefthook"],
       matchUpdateTypes: ["minor", "patch"],
       minimumReleaseAge: "7d",
       automerge: true,
