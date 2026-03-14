@@ -11,6 +11,7 @@
       matchPackageNames: ["/ansible-lint/"],
       minimumReleaseAge: "7d",
       automerge: true,
+      labels: ["automerge"],
     },
     {
       // Automerge patches to ansible-galaxy deps after 3 days
@@ -18,6 +19,7 @@
       matchUpdateTypes: ["patch"],
       minimumReleaseAge: "3d",
       automerge: true,
+      labels: ["automerge"],
     },
     {
       // Automerge molecule and lefthook minor and patch updates after 7 days
@@ -25,6 +27,7 @@
       matchUpdateTypes: ["minor", "patch"],
       minimumReleaseAge: "7d",
       automerge: true,
+      labels: ["automerge"],
     },
   ],
 }
