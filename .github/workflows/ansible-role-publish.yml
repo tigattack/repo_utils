@@ -11,7 +11,6 @@ on:
       op_service_account_key:
         required: true
         description: 'Service account key for 1Password'
-        type: string
 
 jobs:
   release:
