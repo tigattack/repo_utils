@@ -1,0 +1,43 @@
+---
+name: Ansible Galaxy Publish
+on:
+  workflow_call:
+    inputs:
+      role_name:
+        description: 'Name of the Ansible role to publish'
+        required: true
+        type: string
+    secrets:
+      op_service_account_key:
+        required: true
+        description: 'Service account key for 1Password'
+        type: string
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: ${{ inputs.role_name }}
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+
+      - name: Retrieve Galaxy API token
+        id: load_secrets
+        uses: 1password/load-secrets-action@v4
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.op_service_account_key }}
+          GALAXY_API_KEY: op://nhcq7neint7vdnyyq7i3ri7u5y/yth2ea7mbywoiwoiai7an6mzh4/credential
+
+      - name: Install ansible-core
+        shell: bash
+        run: pip3 install ansible-core
+
+      - name: Publish Ansible role to Galaxy
+        shell: bash
+        run: >-
+          ansible-galaxy role import --api-key ${{ steps.load_secrets.outputs.GALAXY_API_KEY }}
+          ${{ github.repository_owner }} ${{ github.event.repository.name }}
